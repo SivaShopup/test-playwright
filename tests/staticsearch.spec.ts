@@ -12,13 +12,13 @@ test('static data for kurta,shoes', async ({ page }) => {
 //   await page.waitForSelector('.list_ctr fw lft', {timeout: 5000});
 
   // Expand brand filter (dynamic)
-  await page.click('text=Babyhug');
+  await page.click('.sprite_list');
   await page.waitForSelector('.filter-brands');
 
   // Select "LuvLap" brand if available
-  const luvLapCheckbox = page.locator('label:has-text("LuvLap") input[type="checkbox"]');
-  if (await luvLapCheckbox.isVisible()) {
-    await luvLapCheckbox.check();
+  const BabyhugCheckbox = page.locator('label:has-text("babyhug") input[type="checkbox"]');
+  if (await BabyhugCheckbox.isVisible()) {
+    await BabyhugCheckbox.check();
   }
 
   await page.waitForTimeout(2000); // Adjust if filters reload asynchronously
