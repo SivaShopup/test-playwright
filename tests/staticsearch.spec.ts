@@ -1,6 +1,20 @@
 import { test, expect } from '@playwright/test';
 
-test('static data for kurta,shoes', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
+    await page.goto('https://www.firstcry.com');
+  });
+  
+  // Run after each test (takes screenshot on failure)
+  test.afterEach(async ({ page }, testInfo) => {
+    if (testInfo.status !== testInfo.expectedStatus) {
+      await page.screenshot({
+        path: `screenshots/${testInfo.title.replace(/\s+/g, '_')}.png`,
+        fullPage: true
+      });
+    }
+  });
+
+test('static data for tshirts', async ({ page }) => {
   await page.goto('https://www.firstcry.com');
 
   // Search for a product
