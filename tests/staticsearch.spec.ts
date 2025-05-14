@@ -1,17 +1,18 @@
 import { test, expect } from '@playwright/test';
 
-test('FirstCry: Search, Filter, Dropdown, Pagination', async ({ page }) => {
+test('static data for kurta,shoes', async ({ page }) => {
   await page.goto('https://www.firstcry.com');
 
   // Search for a product
-  await page.fill('#search_box', 'baby stroller');
+
+  await page.fill('#search_box', 'tshirts');
   await page.press('#search_box', 'Enter');
 
   // Wait for results
-  await page.waitForSelector('.search-list');
+//   await page.waitForSelector('.list_ctr fw lft', {timeout: 5000});
 
   // Expand brand filter (dynamic)
-  await page.click('text=Brand');
+  await page.click('text=Babyhug');
   await page.waitForSelector('.filter-brands');
 
   // Select "LuvLap" brand if available
