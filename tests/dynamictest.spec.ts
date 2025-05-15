@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 const searchTerm = process.env.SEARCH_TERM || 'tshirts';
 const filterBrand = process.env.FILTER_BRAND || 'babyhug';
 
-test('Dynamic for tshirts', async ({ page }) => {
+test('Dynamic test for tshirts', async ({ page }) => {
   await page.goto('https://www.firstcry.com');
 
   // Search for a product
@@ -26,7 +26,7 @@ test('Dynamic for tshirts', async ({ page }) => {
   // Click first product
   const product = page.locator('.search-list .product-box').first();
 //   await expect(product).toBeVisible();
-//   await product.click();
+  // await product.click();
 
   // Verify product detail
   const title = page.locator('h1');

@@ -14,7 +14,7 @@ test.beforeEach(async ({ page }) => {
     }
   });
 
-test('static data for tshirts', async ({ page }) => {
+test('static and dynamic for tshirts', async ({ page }) => {
   await page.goto('https://www.firstcry.com');
 
   // Search for a product
