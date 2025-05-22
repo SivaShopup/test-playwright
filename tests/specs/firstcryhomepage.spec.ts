@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
   await home.open();
 });
 
-test('Search for tshirts', async ({ page }) => {
+test('Parce csv for kids', async ({ page }) => {
   const home = new FirstCryHomePage(page);
   await home.main()
 });

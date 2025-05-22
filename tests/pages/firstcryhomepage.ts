@@ -26,16 +26,17 @@ export class FirstCryHomePage {
 
   async main()
   {
-    const testData=getTestDataFromCSV("test-data/searchdata.csv");
-    const count = await this.productList.count();
+    const testData=getTestDataFromCSV("test-data/searchdata.csv");    
 
     for (const row of testData) {
       console.log(`Running test for: ${row.searchTerm}`);
+      console.log(`Product count: ${row.count}`);
 
       await this.searchFor(`${row.searchTerm}`);
       await this.page.waitForTimeout(2000);
 
-      console.log(`Total products : ${count}'; ${await this.productList.count()}`);
+    const count = await this.productList.count();
+    console.log(`Total products : ${count}'; ${await this.productList.count()}`);
       // console.log(`Found ${count} products`);
 
     for (let i = 0; i < Math.min(3, count); i++) {
