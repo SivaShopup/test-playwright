@@ -37,13 +37,11 @@ export class FirstCryHomePage {
 
     const count = await this.productList.count();
     console.log(`Total products : ${count}'; ${await this.productList.count()}`);
-      // console.log(`Found ${count} products`);
 
     for (let i = 0; i < Math.min(3, count); i++) {
       const name = await this.productList.nth(i).locator('.prod_name').textContent();
       console.log(`- ${name?.trim()}`);  
 
-    
     await expect(this.productList).toHaveCount(0);
     
   }}
