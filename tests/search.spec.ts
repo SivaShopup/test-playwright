@@ -1,24 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Search Tests on FirstCry', () => {
-  // Utility function to dismiss location popup if it appears
-  const dismissPopupIfVisible = async (page) => {
-    const popup = page.locator('#lbl_popup_later');
-    if (await popup.isVisible()) {
-      await popup.click();
-    }
-  };
 
   // Utility function to search and list products
   const searchAndListProducts = async (page, keyword: string, limit: number) => {
     await page.goto('https://www.firstcry.com');
-    await dismissPopupIfVisible(page);
-
-    // Dismiss location popup
-  // const popup = page.locator('#lbl_popup_later');
-  // if (await popup.isVisible({ timeout: 3000 })) {
-  //   await popup.click();
-  // }
 
     await page.fill('#search_box', keyword);
     await page.press('#search_box', 'Enter');

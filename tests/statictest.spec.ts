@@ -9,8 +9,6 @@ test('static test for tshirts', async ({ page }) => {
 
   // Click first product
   const product = page.locator('.search-list .product-box').first();
-//   await expect(product).toBeVisible();
-//   await product.click();
 
   // Verify product detail
   const title = page.locator('h1');

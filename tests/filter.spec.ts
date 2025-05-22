@@ -17,7 +17,7 @@ test.describe('Filter Functionality on FirstCry', () => {
     await page.press('#search_box', 'Enter');
     // await page.waitForSelector('.search-result-cont');
 
-    // Apply brand filter (e.g., selecting "Babyhug")
+    // Apply brand filter ("Babyhug")
     const brandFilter = page.locator('label[for*="Babyhug"]');
     if (await brandFilter.isVisible()) {
       await brandFilter.click();
