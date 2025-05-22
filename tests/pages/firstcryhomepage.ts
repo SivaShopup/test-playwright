@@ -24,11 +24,6 @@ export class FirstCryHomePage {
     await this.searchBox.press('Enter');
   }
 
-  async verifyProductDetailVisible() {
-    const title = this.page.locator('h1');
-    await expect(title).toBeVisible();
-  }
-
   async main()
   {
     const testData=getTestDataFromCSV("test-data/searchdata.csv");
@@ -36,10 +31,19 @@ export class FirstCryHomePage {
 
     for (const row of testData) {
       console.log(`Running test for: ${row.searchTerm}`);
-      console.log(`Product count for '${row.searchTerm}'; ${await this.productList.count()}`);
-    await this.searchFor(`${row.searchTerm}`);
-    await this.page.waitForTimeout(2000);
-    await this.verifyProductDetailVisible();
-  }
 
-}};
+      await this.searchFor(`${row.searchTerm}`);
+      await this.page.waitForTimeout(2000);
+
+      console.log(`Total products : ${count}'; ${await this.productList.count()}`);
+      // console.log(`Found ${count} products`);
+
+    for (let i = 0; i < Math.min(3, count); i++) {
+      const name = await this.productList.nth(i).locator('.prod_name').textContent();
+      console.log(`- ${name?.trim()}`);  
+
+    
+    await expect(this.productList).toHaveCount(0);
+    
+  }}
+}}; 
