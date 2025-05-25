@@ -26,7 +26,8 @@ export class FirstCryHomePage {
 
   async main()
   {
-    const testData=getTestDataFromCSV("test-data/searchdata.csv");    
+    const testData=getTestDataFromCSV("test-data/searchdata.csv");
+    let totalProducts = 0;    
 
     for (const row of testData) {
       console.log(`Running test for: ${row.searchTerm}`);
@@ -36,13 +37,19 @@ export class FirstCryHomePage {
       await this.page.waitForTimeout(2000);
 
     const count = await this.productList.count();
+    const limit = Math.min(Number(row.count), count);
+    console.log(`Total products found: ${count}, displaying: ${limit}`);
+  
     console.log(`Total products : ${count}'; ${await this.productList.count()}`);
 
-    for (let i = 0; i < Math.min(3, count); i++) {
+    for (let i = 0; i < limit; i++) {
       const name = await this.productList.nth(i).locator('.prod_name').textContent();
       console.log(`- ${name?.trim()}`);  
 
-    await expect(this.productList).toHaveCount(0);
+      totalProducts += count;
+      console.log(`Found ${count} products . Total products: ${totalProducts}`);
+
+    await expect(this.productList).toHaveCount(limit);
     
   }}
 }}; 
