@@ -34,22 +34,21 @@ export class FirstCryHomePage {
       console.log(`Product count: ${row.count}`);
 
       await this.searchFor(`${row.searchTerm}`);
-      await this.page.waitForTimeout(2000);
+      await this.page.waitForTimeout(10000);
 
     const count = await this.productList.count();
     const limit = Math.min(Number(row.count), count);
-    console.log(`Total products found: ${count}, displaying: ${limit}`);
+    console.log(`Total products: ${count}, displaying: ${limit}`);
   
     console.log(`Total products : ${count}'; ${await this.productList.count()}`);
 
     for (let i = 0; i < limit; i++) {
       const name = await this.productList.nth(i).locator('.prod_name').textContent();
       console.log(`- ${name?.trim()}`);  
-
+    }
+      await expect(this.productList).toHaveCount(limit);
       totalProducts += count;
-      console.log(`Found ${count} products . Total products: ${totalProducts}`);
-
-    await expect(this.productList).toHaveCount(limit);
-    
-  }}
-}}; 
+  }
+    console.log(`Total products: ${totalProducts}`);
+    }
+  };
