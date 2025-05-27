@@ -45,33 +45,14 @@ export class FirstCryHomePage {
   
     console.log(`Total products : ${count}'; ${await this.productList.count()}`);
 
-    for (let i = 0; i < limit; i++) {
-      const name = await this.productList.nth(i).locator('.prod_name').textContent();
-      console.log(`- ${name?.trim()}`);  
-    }
-
       await expect(this.productList).toHaveCount(count);
       totalProducts += count;
 
-      // ✅ Brand assertion (check if any product contains brand name)
-    const brandLocator = this.page.locator('.prod_name');
-    const brandCount = await brandLocator.count();
-    console.log(`Brand count: ${brandCount}`);
-
-    let brandFound = false;
-    for (let i = 0; i < brandCount; i++) {
-      const text = await brandLocator.nth(i).textContent();
-      if (text?.toLowerCase().includes(row.brand.toLowerCase())) {
-        brandFound = true;
-        break;
-      }
+    console.log(`Brand checkbox: ${await brandCheckbox.isVisible()}`);
+    if (await brandCheckbox.isVisible()) {
+      await brandCheckbox.check();
+      await this.page.waitForTimeout(10000);
     }
-
-      if (await brandCheckbox.isVisible()) {
-        await brandCheckbox.check();
-      }
-
-      // await expect(brandCheckbox).toBeChecked();
   }
     console.log(`Total products: ${totalProducts}`);
     this.page.pause; 
